@@ -1,0 +1,16 @@
+{{#if items.length}}
+<div data-list-id="{{id}}" class="list list-default fl-widget-instance" ontouchstart="">
+  <ul id="list-holder">
+    {{#each items}}
+    <li class="linked">
+      <div class="list-desc"  data-button-id="{{id}}">
+        <p class="list-title">{{title}}</p>
+        <p>{{description}}</p>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+{{else}}
+  <span data-list-id="{{id}}" class="list-placeholder"><i class="fa fa-list" aria-hidden="true"></i></span>
+{{/if}}
