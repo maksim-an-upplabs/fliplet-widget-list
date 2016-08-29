@@ -30,7 +30,7 @@
 
                   <div class="form-group">
                     <div class="col-xs-4 control-label">
-                      <label for="list-item-title-\{{id}}">Title</label>
+                      <label for="list-item-title-{{id}}">Title</label>
                     </div>
                     <div class="col-xs-8">
                       <input type="text" class="form-control list-item-title" id="list-item-title-{{id}}" name="list-item-title-{{id}}" placeholder="Enter title" value="{{#unless title}}
@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-xs-8">
                       <textarea class="form-control list-item-desc" id="list-item-desc-{{id}}" name="list-item-desc-{{id}}" rows="3"
-                                {{#unless description}}placeholder="Enter description" ></textarea>{{else}} >{{~description~}} </textarea>{{/unless}}
+                                {{#unless description}}placeholder="Enter description" >{{else}} >{{~description~}} {{/unless}} </textarea>
                     </div>
                   </div>
 

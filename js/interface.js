@@ -57,6 +57,7 @@ $(".tab-content")
         id = $item.data('id');
 
     _.remove(data.items, {id: id});
+    _.remove(linkPromises,{id:id});
 
     $(this).parents('.panel').remove();
     checkPanelLength();
@@ -160,7 +161,8 @@ function initLinkProvider(item){
       if (event === 'interface-validate') {
         Fliplet.Widget.toggleSaveButton(data.isValid === true);
       }
-    }
+    },
+    closeOnSave: false
   });
 
   linkActionProvider.then(function (data) {
@@ -168,6 +170,7 @@ function initLinkProvider(item){
     return Promise.resolve();
   });
 
+  linkActionProvider.id = item.id;
   linkPromises.push(linkActionProvider);
 }
 function template(name) {
