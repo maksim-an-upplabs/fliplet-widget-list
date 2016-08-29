@@ -3,9 +3,9 @@ $('[data-button-id]').click(function (event) {
 
     var data = Fliplet.Widget.getData($(this).parents('[data-list-id]').data('list-id'));
     
-    var linkAction = _.find(data.items,{id: $(this).data('button-id')});
+    var itemData = _.find(data.items,{id: $(this).data('button-id')});
 
-    if(!_.isUndefined(linkAction)) {
-        Fliplet.Navigate.to(linkAction);
+    if(!_.isUndefined(itemData) && !_.isUndefined(itemData.linkAction)) {
+        Fliplet.Navigate.to(itemData.linkAction);
     }
 });

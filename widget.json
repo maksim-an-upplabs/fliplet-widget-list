@@ -12,7 +12,7 @@
     "dependencies": [
       "fliplet-core",
       "fliplet-studio-ui",
-      "jqueryUi",
+      "jquery-ui",
       "lodash",
       "handlebars",
       "bootstrap"
