@@ -57,7 +57,7 @@ $(".tab-content")
         id = $item.data('id');
 
     _.remove(data.items, {id: id});
-    _.remove(linkPromises,{id:id});
+    _.remove(linkPromises,{id: id});
 
     $(this).parents('.panel').remove();
     checkPanelLength();
@@ -149,6 +149,9 @@ $('#help_tip').on('click', function() {
 // FUNCTIONS
 function initLinkProvider(item){
 
+  item.linkAction = item.linkAction || {};
+  item.linkAction.provId = item.id;
+
   var linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
     // If provided, the iframe will be appended here,
     // otherwise will be displayed as a full-size iframe overlay
@@ -166,7 +169,7 @@ function initLinkProvider(item){
   });
 
   linkActionProvider.then(function (data) {
-    item.linkAction = data.data;
+    item.linkAction = data ? data.data: {};
     return Promise.resolve();
   });
 
