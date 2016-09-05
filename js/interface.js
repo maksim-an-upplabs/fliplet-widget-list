@@ -17,6 +17,8 @@ var templates = {
   panel: template('panel')
 };
 
+checkPanelLength();
+
 setTimeout (function() {
   // SORTING PANELS
   $('.panel-group').sortable({
