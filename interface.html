@@ -1,4 +1,4 @@
-
+<div>
   <form class="form-horizontal">
 
     <header>
@@ -68,13 +68,15 @@
             </div>
           </div>
           {{/each}}
-            {{else}}
-              <div class="panels-empty">
-                <p>Create as many list items as you want.</br>
-                  Start by adding a new one by pressing the button below.</p>
-              </div>
-            {{/if}}
           </div>
+          {{else}}
+      </div>
+
+          <div class="panels-empty">
+              <p>Create as many list items as you want.</br>
+                Start by adding a new one by pressing the button below.</p>
+            </div>
+          {{/if}}
           <div class="controls clearfix">
             <div class="btn btn-link expand-items hidden">Expand/Collapse All</div>
             <div class="btn-holder">
@@ -90,9 +92,8 @@
         </div>
       </div>
     </div>
-
   </form>
-
+</div>
   <template id="template-panel">
     <div class="panel panel-default" data-id="\{{id}}">
       <div class="panel-heading ui-sortable-handle">
