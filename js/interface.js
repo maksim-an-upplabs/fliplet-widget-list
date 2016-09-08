@@ -3,6 +3,7 @@ var widgetId = Fliplet.Widget.getDefaultId();
 var data = Fliplet.Widget.getData() || {items:[]},
     linkPromises = [];
 
+data.items = data.items || [];
 _.forEach(data.items,function (item){
   if(_.isObject(item.linkAction)) {
     initLinkProvider(item);
@@ -253,19 +254,21 @@ function save(notifyComplete){
     item.title = $('#list-item-title-'+item.id).val();
   });
 
-  Promise.all(linkPromises).then(function () {
-    // when all providers have finished
-    Fliplet.Widget.save(data).then(function () {
-      if(notifyComplete) {
+  if(notifyComplete) {
+    Promise.all(linkPromises).then(function () {
+      // when all providers have finished
+      Fliplet.Widget.save(data).then(function () {
         Fliplet.Widget.complete();
-        return;
-      }
-      Fliplet.Studio.emit('reload-widget-instance', widgetId);
+      });
     });
-  });
 
-  // forward save request to all providers
-  linkPromises.forEach(function (promise) {
-    promise.forwardSaveRequest();
+    // forward save request to all providers
+    linkPromises.forEach(function (promise) {
+      promise.forwardSaveRequest();
+    });
+  }
+
+  Fliplet.Widget.save(data).then(function () {
+    Fliplet.Studio.emit('reload-widget-instance', widgetId);
   });
 }
