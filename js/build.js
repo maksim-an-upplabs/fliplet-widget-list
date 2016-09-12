@@ -1,4 +1,4 @@
-$('[data-list-item-id]').click(function (event) {
+$('.linked[data-list-item-id]').click(function (event) {
     event.preventDefault();
 
     var data = Fliplet.Widget.getData($(this).parents('[data-list-id]').data('list-id'));
@@ -9,3 +9,4 @@ $('[data-list-item-id]').click(function (event) {
         Fliplet.Navigate.to(itemData.linkAction);
     }
 });
+
