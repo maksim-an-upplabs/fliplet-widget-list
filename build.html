@@ -1,0 +1,20 @@
+{{#if items.length}}
+<div data-list-id="{{id}}" class="list list-default" >
+  <ul id="list-holder">
+    {{#each items}}
+    <li {{#if linkAction}}class="linked" {{/if}} data-list-item-id="{{id}}">
+      <div class="list-desc">
+        <p class="list-title">{{title}}</p>
+        {{#if description}}<p>{{description}}</p>{{/if}}
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+{{else}}
+  <div>
+    <span data-list-id="{{id}}" class="list-placeholder">
+      <i class="fa fa-list" aria-hidden="true"></i>
+    </span>
+  </div>
+{{/if}}

@@ -1,2 +1,1 @@
-# fliplet-widget-list
-Widget for a list 
+# Simple List widget
