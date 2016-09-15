@@ -224,7 +224,15 @@ function setListItemTitle(index, title) {
 }
 
 function addListItem(data) {
-  $accordionContainer.append(templates.panel(data));
+  var $newPanel = $(templates.panel(data));
+  $accordionContainer.append($newPanel);
+
+  $newPanel.find('.form-control:eq(0)').select();
+  $('form.form-horizontal').stop().animate({
+    scrollTop: $('.tab-content').height()
+  }, 300, function(){
+    $('form.form-horizontal').trigger('scroll');
+  });
 }
 
 function checkPanelLength() {
