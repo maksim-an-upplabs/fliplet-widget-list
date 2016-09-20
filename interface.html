@@ -1,4 +1,4 @@
-
+<div>
   <form class="form-horizontal">
 
     <header>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-sm-8">
                       <div class="btn btn-default list-item-set-link {{#if linkAction}} hidden{{/if}}">Add Link</div>
-                      <div class="btn btn-danger link-remove {{#unless linkAction}} hidden {{/unless}}">Remove</div>
+                      <div class="btn btn-link text-danger link-remove {{#unless linkAction}} hidden {{/unless}}">Remove Link</div>
                       <div class="add-link"></div>
                     </div>
                   </div>
@@ -93,7 +93,7 @@
       </div>
     </div>
   </form>
-
+</div>
   <template id="template-panel">
     <div class="panel panel-default" data-id="\{{id}}">
       <div class="panel-heading ui-sortable-handle">
@@ -133,7 +133,7 @@
               </div>
               <div class="col-sm-8">
                 <div class="btn btn-default list-item-set-link">Add Link</div>
-                <div class="btn btn-link text-remove link-remove hidden">Remove</div>
+                <div class="btn btn-link text-danger link-remove hidden">Remove</div>
                 <div class="add-link"></div>
               </div>
             </div>
