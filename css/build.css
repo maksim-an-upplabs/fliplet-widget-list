@@ -1,11 +1,5 @@
-.list-placeholder {
-	border: 1px solid #cccccc;
-	background-color: rgba(217, 221, 222, 0.5);
-	text-align: center;
-	display: block;
-	padding: 20px;
-	color: #333333;
-	font-size: 32px;
+.list.list-default.placeholder {
+	opacity: 0.5;
 	cursor: pointer;
 	-webkit-user-select: none !important;
 	-ms-user-select: none !important;
