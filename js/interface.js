@@ -268,19 +268,19 @@ function save(notifyComplete){
     Fliplet.Widget.all(linkPromises).then(function () {
       // when all providers have finished
       Fliplet.Widget.save(data).then(function () {
-
-        if (notifyComplete) {
-          Fliplet.Widget.complete();
-        } else {
-          // I don't think this is necessary
-          // Fliplet.Studio.emit('reload-widget-instance', widgetId);
-        }
+        // Close the interface for good
+        Fliplet.Widget.complete();
       });
     });
 
     // forward save request to all providers
     linkPromises.forEach(function (promise) {
       promise.forwardSaveRequest();
+    });
+  } else {
+    // Partial save while typing/using the interface
+    Fliplet.Widget.save(data).then(function () {
+      Fliplet.Studio.emit('reload-widget-instance', widgetId);
     });
   }
 }
