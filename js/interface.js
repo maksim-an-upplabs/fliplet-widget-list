@@ -194,6 +194,7 @@ function initLinkProvider(item){
   linkActionProvider.id = item.id;
   linkPromises.push(linkActionProvider);
 }
+
 function template(name) {
   return Handlebars.compile($('#template-' + name).html());
 }
@@ -264,10 +265,16 @@ function save(notifyComplete){
   });
 
   if(notifyComplete) {
-    Promise.all(linkPromises).then(function () {
+    Fliplet.Widget.all(linkPromises).then(function () {
       // when all providers have finished
       Fliplet.Widget.save(data).then(function () {
-        Fliplet.Widget.complete();
+
+        if (notifyComplete) {
+          Fliplet.Widget.complete();
+        } else {
+          // I don't think this is necessary
+          // Fliplet.Studio.emit('reload-widget-instance', widgetId);
+        }
       });
     });
 
@@ -276,8 +283,4 @@ function save(notifyComplete){
       promise.forwardSaveRequest();
     });
   }
-
-  Fliplet.Widget.save(data).then(function () {
-    Fliplet.Studio.emit('reload-widget-instance', widgetId);
-  });
 }
