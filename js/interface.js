@@ -194,6 +194,7 @@ function initLinkProvider(item){
   linkActionProvider.id = item.id;
   linkPromises.push(linkActionProvider);
 }
+
 function template(name) {
   return Handlebars.compile($('#template-' + name).html());
 }
@@ -264,9 +265,10 @@ function save(notifyComplete){
   });
 
   if(notifyComplete) {
-    Promise.all(linkPromises).then(function () {
+    Fliplet.Widget.all(linkPromises).then(function () {
       // when all providers have finished
       Fliplet.Widget.save(data).then(function () {
+        // Close the interface for good
         Fliplet.Widget.complete();
       });
     });
@@ -275,9 +277,10 @@ function save(notifyComplete){
     linkPromises.forEach(function (promise) {
       promise.forwardSaveRequest();
     });
+  } else {
+    // Partial save while typing/using the interface
+    Fliplet.Widget.save(data).then(function () {
+      Fliplet.Studio.emit('reload-widget-instance', widgetId);
+    });
   }
-
-  Fliplet.Widget.save(data).then(function () {
-    Fliplet.Studio.emit('reload-widget-instance', widgetId);
-  });
 }
