@@ -18,6 +18,7 @@ var templates = {
   panel: template('panel')
 };
 
+enableSwipeSave();
 checkPanelLength();
 
 setTimeout (function() {
@@ -144,6 +145,9 @@ $(".tab-content")
   })
   .on('shown.bs.collapse hidden.bs.collapse', '.panel-collapse', function() {
     $('.tab-content').trigger('scroll');
+  })
+  .on('change', 'input[name="enable_list_saving"]:radio', function() {
+    enableSwipeSave();
   });
 
 $('#help_tip').on('click', function() {
@@ -165,6 +169,16 @@ $('body > .form-horizontal').scroll(function(event) {
 });
 
 // FUNCTIONS
+function enableSwipeSave() {
+  if ($('#swipe-to-save-yes').is(':checked')) {
+    $('#saved-list-field').addClass('show');
+    data.swipeToSave = true;
+  } else if ($('#swipe-to-save-no').is(':checked')) {
+    $('#saved-list-field').removeClass('show');
+    data.swipeToSave = false;
+  }
+}
+
 function initLinkProvider(item){
 
   item.linkAction = item.linkAction || {};
@@ -262,6 +276,11 @@ function save(notifyComplete){
   _.forEach(data.items,function(item){
     item.description = $('#list-item-desc-'+item.id).val();
     item.title = $('#list-item-title-'+item.id).val();
+    if (data.swipeToSave) {
+      data.swipeToSaveLabel = ( $('[name="saved_list_label"]').val().length ) ? $('[name="saved_list_label"]').val() : 'My List';
+    } else {
+      data.swipeToSaveLabel = '';
+    }
   });
 
   if(notifyComplete) {
