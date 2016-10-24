@@ -1,6 +1,19 @@
 {{#if items.length}}
-<div data-list-id="{{id}}" class="list list-default" >
-  <ul id="list-holder">
+<div data-list-id="{{id}}" class="list list-default {{#if swipeToSave}}list-swipe-save{{/if}}">
+  {{#if swipeToSave}}
+  <div class="filter-wrapper">
+    <ul class="list-save-filter">
+      <li class="filter-{{id}} active" data-filter="all">All</li>
+      <li class="filter-{{id}}" data-filter=".saved">{{swipeToSaveLabel}}</li>
+    </ul>
+  </div>
+  <div class="label-instruction">
+    <small class="label label-all">Swipe Right to add to <strong>{{swipeToSaveLabel}}</strong> &rarr;</small>
+    <small class="label label-my">&larr; Swipe Left to remove from <strong>{{swipeToSaveLabel}}</strong></small>
+    <small class="label label-empty">Nothing is found in <strong>{{swipeToSaveLabel}}</strong>. Swipe Right (&rarr;) on any list item to save it in <strong>{{swipeToSaveLabel}}</strong></small>
+  </div>
+  {{/if}}
+  <ul class="list-holder {{#if swipeToSave}}list-swipe{{/if}}">
     {{#each items}}
     <li {{#if linkAction}}class="linked" {{/if}} data-list-item-id="{{id}}">
       <div class="list-desc">
@@ -13,7 +26,7 @@
 </div>
 {{else}}
 <div class="list list-default placeholder">
-  <ul id="list-holder">
+  <ul class="list-holder">
     <li>
       <div class="list-desc">
         <p class="list-title">List item 1</p>

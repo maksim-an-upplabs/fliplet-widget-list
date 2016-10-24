@@ -18,6 +18,7 @@ var templates = {
   panel: template('panel')
 };
 
+enableSwipeSave();
 checkPanelLength();
 
 setTimeout (function() {
@@ -76,10 +77,7 @@ $(".tab-content")
 
     initLinkProvider(item);
 
-    if ( $(this).siblings().hasClass('hidden') ) {
-      $(this).siblings().removeClass('hidden');
-    }
-
+    $(this).siblings().removeClass('hidden');
     $(this).addClass('hidden');
     $(this).siblings('.link-remove').show();
     save();
@@ -144,6 +142,9 @@ $(".tab-content")
   })
   .on('shown.bs.collapse hidden.bs.collapse', '.panel-collapse', function() {
     $('.tab-content').trigger('scroll');
+  })
+  .on('change', 'input[name="enable_list_saving"]:radio', function() {
+    enableSwipeSave();
   });
 
 $('#help_tip').on('click', function() {
@@ -165,6 +166,16 @@ $('body > .form-horizontal').scroll(function(event) {
 });
 
 // FUNCTIONS
+function enableSwipeSave() {
+  if ($('#swipe-to-save-yes').is(':checked')) {
+    $('#saved-list-field').addClass('show');
+    data.swipeToSave = true;
+  } else if ($('#swipe-to-save-no').is(':checked')) {
+    $('#saved-list-field').removeClass('show');
+    data.swipeToSave = false;
+  }
+}
+
 function initLinkProvider(item){
 
   item.linkAction = item.linkAction || {};
@@ -237,18 +248,10 @@ function addListItem(data) {
 }
 
 function checkPanelLength() {
-  if ( $('.panel').length > 0 ) {
-    if($('.panel').length > 1) {
-      $('.expand-items').removeClass("hidden");
-    } else {
-      $('.expand-items').addClass("hidden");
-    }
-    if ( !$('.panels-empty').hasClass('hidden') ) {
-      $('.panels-empty').addClass('hidden');
-    }
+  if ( $('.panel').length ) {
+    $('#list-items').removeClass('list-items-empty');
   } else {
-    $('.panels-empty').removeClass('hidden');
-    $('.expand-items').addClass("hidden");
+    $('#list-items').addClass('list-items-empty');
   }
 }
 
@@ -263,6 +266,10 @@ function save(notifyComplete){
     item.description = $('#list-item-desc-'+item.id).val();
     item.title = $('#list-item-title-'+item.id).val();
   });
+  data.swipeToSaveLabel =
+    ( data.swipeToSave && $('[name="saved_list_label"]').val().length )
+      ? $('[name="saved_list_label"]').val()
+      : 'My List';
 
   if(notifyComplete) {
     Fliplet.Widget.all(linkPromises).then(function () {
