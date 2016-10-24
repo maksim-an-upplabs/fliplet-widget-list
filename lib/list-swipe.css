@@ -13,14 +13,17 @@ ul.list-swipe li {
     overflow: hidden;
     cursor: ew-resize;
 }
-.filter-loaded ul.list-swipe {
+ul.list-swipe {
     overflow: hidden;
 }
-.filter-loaded ul.list-swipe li {
+ul.list-swipe li {
     -webkit-transition-origin: center top;
     transition-origin: center top;
     display: none;
     width: 100%;
+}
+.fl-page-editable ul.list-swipe li {
+  display: block;
 }
 ul.list-swipe .list-swipe-wrapper {
     -webkit-transform: translate3d(0,0,0);
@@ -107,14 +110,14 @@ ul.list-swipe .swipe-action.swipe-action-left.active {
     text-align: center;
     margin-top: 0.5em;
 }
-.filter-loaded ul.list-save-filter {
+ul.list-save-filter {
     display: inline-block;
     text-align: center;
     font-size: 0 !important;
     border: 1px solid #4679BD;
     border-radius: 3px;
 }
-.filter-loaded ul.list-save-filter li {
+ul.list-save-filter li {
     display: inline-block !important;
     min-height: 0 !important;
     margin: 0 !important;
@@ -127,11 +130,11 @@ ul.list-swipe .swipe-action.swipe-action-left.active {
     color: #4679BD;
     cursor: pointer;
 }
-.filter-loaded ul.list-save-filter li.active {
+ul.list-save-filter li.active {
     background: #4679BD;
     color: #fff;
 }
-.filter-loaded ul.list-save-filter li:first-child {
+ul.list-save-filter li:first-child {
     border-left: none;
 }
 .label-instruction {
