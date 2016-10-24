@@ -51,6 +51,7 @@ setTimeout (function() {
       $('.tab-content').trigger('scroll');
     }
   });
+  $('form.form-horizontal').trigger('scroll');
 }, 1000);
 
 // EVENTS

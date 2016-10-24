@@ -269,6 +269,7 @@ header a {
 
 .controls .expand-items {
   float: left;
+  font-size: 0.7em;
 }
 
 .list-items-empty .controls .expand-items {
