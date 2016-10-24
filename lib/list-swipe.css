@@ -19,11 +19,11 @@ ul.list-swipe {
 ul.list-swipe li {
     -webkit-transition-origin: center top;
     transition-origin: center top;
-    display: none;
+    /*display: none;*/
     width: 100%;
 }
-.fl-page-editable ul.list-swipe li {
-  display: block;
+.filter-loaded ul.list-swipe li {
+  display: none;
 }
 ul.list-swipe .list-swipe-wrapper {
     -webkit-transform: translate3d(0,0,0);
