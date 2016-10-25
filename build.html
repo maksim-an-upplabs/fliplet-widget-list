@@ -18,7 +18,7 @@
     <li {{#if linkAction}}class="linked" {{/if}} data-list-item-id="{{id}}">
       <div class="list-desc">
         <p class="list-title">{{title}}</p>
-        {{#if description}}<p>{{description}}</p>{{/if}}
+        {{#if description}}<p>{{nl2br description}}</p>{{/if}}
       </div>
     </li>
     {{/each}}
