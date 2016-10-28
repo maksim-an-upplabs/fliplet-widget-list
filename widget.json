@@ -39,6 +39,6 @@
     ]
   },
   "references": [
-    "items.$.linkAction.page"
+    "items.$.linkAction.page:page"
   ]
 }
