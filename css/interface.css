@@ -107,7 +107,7 @@ a {
 
 header {
     display: flex;
-    font-size: 0.8em;
+    font-size: 1em;
     border-bottom: 1px solid #E3E9EB;
     margin-bottom: 3rem;
     padding-bottom: 1.5em;
@@ -413,10 +413,4 @@ textarea.form-control {
 
 #saved-list-field {
     display: none;
-}
-/* WIDTH OF BIGGEST IFRAME */
-@media only screen and (min-width: 488px) {
-    header {
-        font-size: 1.0em;
-    }
 }
