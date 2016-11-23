@@ -10,7 +10,6 @@ _.forEach(data.items,function (item){
   }
 });
 
-var listLength = data.items.length + 1;
 var accordionCollapsed = false;
 
 var $accordionContainer = $('#accordion');
@@ -66,7 +65,6 @@ $(".tab-content")
 
     $(this).parents('.panel').remove();
     checkPanelLength();
-    listLength--;
     save();
 
   })
@@ -122,10 +120,10 @@ $(".tab-content")
   })
   .on('click', '.new-list-item', function() {
 
-    var item ={};
+    var item = {};
     item.id = makeid(8);
-    item.number = listLength++;
     item.linkAction = null;
+    item.title = 'List item ' + ($('#list-items .panel').length + 1);
     item.description = "";
     data.items.push(item);
 
