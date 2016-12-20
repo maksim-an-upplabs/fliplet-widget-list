@@ -13,7 +13,7 @@ $('[data-list-id]').each(function(){
   var data = Fliplet.Widget.getData( $(this).attr('data-list-id') );
   if (data.swipeToSave) {
     window.ui = window.ui || {};
-    window.ui['swipeSavedList' + $(this).attr('data-list-slug')] = new SwipeSaveList(this, {
+    window.ui['swipeSavedList' + $(this).attr('data-list-uuid')] = new SwipeSaveList(this, {
       savedListLabel: data.swipeToSaveLabel || 'My list'
     });
   }
