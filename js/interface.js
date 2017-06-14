@@ -1,13 +1,13 @@
 // VARS
 var widgetId = Fliplet.Widget.getDefaultId();
-var data = Fliplet.Widget.getData() || {items:[]};
+var data = Fliplet.Widget.getData() || {
+  items: []
+};
 var linkPromises = [];
 
 data.items = data.items || [];
-_.forEach(data.items,function (item){
-  if(_.isObject(item.linkAction)) {
-    initLinkProvider(item);
-  }
+_.forEach(data.items, function(item) {
+  initLinkProvider(item);
 });
 
 var accordionCollapsed = false;
@@ -20,7 +20,7 @@ var templates = {
 enableSwipeSave();
 checkPanelLength();
 
-setTimeout (function() {
+setTimeout(function() {
   // SORTING PANELS
   $('.panel-group').sortable({
     handle: ".panel-heading",
@@ -38,8 +38,10 @@ setTimeout (function() {
     stop: function(event, ui) {
       ui.item.removeClass('focus');
 
-      var sortedIds = $( ".panel-group" ).sortable( "toArray" ,{attribute: 'data-id'});
-      data.items = _.sortBy(data.items, function(item){
+      var sortedIds = $(".panel-group").sortable("toArray", {
+        attribute: 'data-id'
+      });
+      data.items = _.sortBy(data.items, function(item) {
         return sortedIds.indexOf(item.id);
       });
       save();
@@ -58,40 +60,17 @@ $(".tab-content")
   .on('click', '.icon-delete', function() {
 
     var $item = $(this).closest("[data-id], .panel"),
-        id = $item.data('id');
+      id = $item.data('id');
 
-    _.remove(data.items, {id: id});
-    _.remove(linkPromises,{id: id});
+    _.remove(data.items, {
+      id: id
+    });
+    _.remove(linkPromises, {
+      id: id
+    });
 
     $(this).parents('.panel').remove();
     checkPanelLength();
-    save();
-
-  })
-  .on('click', '.list-item-set-link', function() {
-
-    var $item = $(this).closest("[data-id], .panel"),
-        id = $item.data('id'),
-        item = _.find(data.items, {id: id});
-
-    initLinkProvider(item);
-
-    $(this).siblings().removeClass('hidden');
-    $(this).addClass('hidden');
-    $(this).siblings('.link-remove').show();
-    save();
-
-  })
-  .on('click', '.link-remove', function() {
-    var $item = $(this).closest("[data-id], .panel"),
-        id = $item.data('id'),
-        item = _.find(data.items, {id: id});
-
-    _.remove(linkPromises,{id: id});
-    $('[data-id="' + item.id + '"] .add-link').empty();
-    item.linkAction = null;
-    $(this).addClass('hidden');
-    $(this).siblings('.list-item-set-link').removeClass('hidden');
     save();
 
   })
@@ -128,6 +107,7 @@ $(".tab-content")
     data.items.push(item);
 
     addListItem(item);
+    initLinkProvider(item);
 
     checkPanelLength();
     save();
@@ -175,7 +155,7 @@ function enableSwipeSave() {
   }
 }
 
-function initLinkProvider(item){
+function initLinkProvider(item) {
 
   item.linkAction = item.linkAction || {};
   item.linkAction.provId = item.id;
@@ -188,7 +168,7 @@ function initLinkProvider(item){
     // the interface gets repopulated with the same stuff
     data: item.linkAction,
     // Events fired from the provider
-    onEvent: function (event, data) {
+    onEvent: function(event, data) {
       if (event === 'interface-validate') {
         Fliplet.Widget.toggleSaveButton(data.isValid === true);
       }
@@ -196,8 +176,8 @@ function initLinkProvider(item){
     closeOnSave: false
   });
 
-  linkActionProvider.then(function (data) {
-    item.linkAction = data ? data.data: {};
+  linkActionProvider.then(function(data) {
+    item.linkAction = data && data.data.action !== 'none' ? data.data : null;
     return Promise.resolve();
   });
 
@@ -209,23 +189,22 @@ function template(name) {
   return Handlebars.compile($('#template-' + name).html());
 }
 
-function makeid(length)
-{
+function makeid(length) {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-  for( var i=0; i < length; i++ )
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
+  for (var i = 0; i < length; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
 
   return text;
 }
 
-function expandAccordion(){
+function expandAccordion() {
   accordionCollapsed = false;
   $('.panel-collapse').collapse('show');
 }
 
-function collapseAccordion(){
+function collapseAccordion() {
   accordionCollapsed = true;
   $('.panel-collapse').collapse('hide');
 }
@@ -241,51 +220,51 @@ function addListItem(data) {
   $newPanel.find('.form-control:eq(0)').select();
   $('form.form-horizontal').stop().animate({
     scrollTop: $('.tab-content').height()
-  }, 300, function(){
+  }, 300, function() {
     $('form.form-horizontal').trigger('scroll');
   });
 }
 
 function checkPanelLength() {
-  if ( $('.panel').length ) {
+  if ($('.panel').length) {
     $('#list-items').removeClass('list-items-empty');
   } else {
     $('#list-items').addClass('list-items-empty');
   }
 }
 
-Fliplet.Widget.onSaveRequest(function () {
+Fliplet.Widget.onSaveRequest(function() {
   save(true);
 });
 
-var debounceSave = _.debounce( save, 500);
+var debounceSave = _.debounce(save, 500);
 
-function save(notifyComplete){
-  _.forEach(data.items,function(item){
-    item.description = $('#list-item-desc-'+item.id).val();
-    item.title = $('#list-item-title-'+item.id).val();
+function save(notifyComplete) {
+  _.forEach(data.items, function(item) {
+    item.description = $('#list-item-desc-' + item.id).val();
+    item.title = $('#list-item-title-' + item.id).val();
   });
   data.swipeToSaveLabel =
-    ( data.swipeToSave && $('[name="saved_list_label"]').val().length )
-      ? $('[name="saved_list_label"]').val()
-      : 'My List';
+    (data.swipeToSave && $('[name="saved_list_label"]').val().length) ?
+    $('[name="saved_list_label"]').val() :
+    'My List';
 
-  if(notifyComplete) {
-    Fliplet.Widget.all(linkPromises).then(function () {
+  if (notifyComplete) {
+    Fliplet.Widget.all(linkPromises).then(function() {
       // when all providers have finished
-      Fliplet.Widget.save(data).then(function () {
+      Fliplet.Widget.save(data).then(function() {
         // Close the interface for good
         Fliplet.Widget.complete();
       });
     });
 
     // forward save request to all providers
-    linkPromises.forEach(function (promise) {
+    linkPromises.forEach(function(promise) {
       promise.forwardSaveRequest();
     });
   } else {
     // Partial save while typing/using the interface
-    Fliplet.Widget.save(data).then(function () {
+    Fliplet.Widget.save(data).then(function() {
       Fliplet.Studio.emit('reload-widget-instance', widgetId);
     });
   }
