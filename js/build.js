@@ -1,7 +1,7 @@
 $('.linked[data-list-item-id]').click(function (event) {
   event.preventDefault();
 
-  if ($(this).parents('.list-swipe').hasClass('swiping')) {
+  if ($(this).parents('.list-swipe.swiping').length) {
     return;
   }
 
