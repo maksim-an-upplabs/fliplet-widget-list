@@ -1,6 +1,10 @@
 $('.linked[data-list-item-id]').click(function (event) {
   event.preventDefault();
 
+  if ($(this).parents('.list-swipe').hasClass('swiping')) {
+    return;
+  }
+
   var data = Fliplet.Widget.getData($(this).parents('[data-list-id]').attr('data-list-id'));
   var itemData = _.find(data.items,{id: $(this).attr('data-list-item-id')});
 
