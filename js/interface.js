@@ -17,6 +17,8 @@ var templates = {
   panel: template('panel')
 };
 
+var debounceSave = _.debounce(save, 500);
+
 enableSwipeSave();
 checkPanelLength();
 
@@ -31,11 +33,33 @@ setTimeout(function() {
     cursor: '-webkit-grabbing; -moz-grabbing;',
     axis: 'y',
     start: function(event, ui) {
+      var itemId = $(ui.item).data('id');
+      var itemProvider = _.find(linkPromises, function(provider) {
+        return provider.id === itemId;
+      });
+
+      save();
+
+      // removes provider
+      itemProvider = null;
+      _.remove(linkPromises, {
+        id: itemId
+      });
+
       $('.panel-collapse.in').collapse('hide');
       ui.item.addClass('focus').css('height', ui.helper.find('.panel-heading').outerHeight() + 2);
       $('.panel').not(ui.item).addClass('faded');
     },
     stop: function(event, ui) {
+      var itemId = $(ui.item).data('id');
+      var movedItem = _.find(data.items, function(item) {
+        return item.id === itemId;
+      });
+
+      // sets up new provider
+      $('[data-id="' + itemId + '"] .add-link').html('');
+      initLinkProvider(movedItem);
+
       ui.item.removeClass('focus');
 
       var sortedIds = $(".panel-group").sortable("toArray", {
@@ -44,8 +68,9 @@ setTimeout(function() {
       data.items = _.sortBy(data.items, function(item) {
         return sortedIds.indexOf(item.id);
       });
-      save();
       $('.panel').not(ui.item).removeClass('faded');
+      
+      save(false, true);
     },
     sort: function(event, ui) {
       $('.panel-group').sortable('refresh');
@@ -237,9 +262,7 @@ Fliplet.Widget.onSaveRequest(function() {
   save(true);
 });
 
-var debounceSave = _.debounce(save, 500);
-
-function save(notifyComplete) {
+function save(notifyComplete, dragStop) {
   _.forEach(data.items, function(item) {
     item.description = $('#list-item-desc-' + item.id).val();
     item.title = $('#list-item-title-' + item.id).val();
@@ -249,23 +272,26 @@ function save(notifyComplete) {
     $('[name="saved_list_label"]').val() :
     'My List';
 
-  if (notifyComplete) {
+  // forward save request to all providers
+  linkPromises.forEach(function(promise) {
+    promise.forwardSaveRequest();
+  });
+  
+  if (!dragStop) {
     Fliplet.Widget.all(linkPromises).then(function() {
       // when all providers have finished
       Fliplet.Widget.save(data).then(function() {
-        // Close the interface for good
-        Fliplet.Widget.complete();
+        if (notifyComplete) {
+          // Close the interface for good
+          Fliplet.Widget.complete();
+        } else {
+          Fliplet.Studio.emit('reload-widget-instance', widgetId);
+        }
       });
     });
-
-    // forward save request to all providers
-    linkPromises.forEach(function(promise) {
-      promise.forwardSaveRequest();
-    });
   } else {
-    // Partial save while typing/using the interface
     Fliplet.Widget.save(data).then(function() {
       Fliplet.Studio.emit('reload-widget-instance', widgetId);
     });
-  }
+  } 
 }
