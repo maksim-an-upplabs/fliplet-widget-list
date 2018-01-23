@@ -69,6 +69,7 @@ setTimeout(function() {
         return sortedIds.indexOf(item.id);
       });
       $('.panel').not(ui.item).removeClass('faded');
+      
       save(false, true);
     },
     sort: function(event, ui) {
