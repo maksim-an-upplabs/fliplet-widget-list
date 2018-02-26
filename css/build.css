@@ -1,68 +1,68 @@
 .list.list-default.placeholder {
-	opacity: 0.5;
-	cursor: pointer;
-	-webkit-user-select: none !important;
-	-ms-user-select: none !important;
-	user-select: none !important;
-	-webkit-user-modify: read-only !important;
+  opacity: 0.5;
+  cursor: pointer;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-user-modify: read-only !important;
 }
 
 .list.list-default ul {
-	padding: 0;
-	margin: 0;
-	font-size: 16px;
-	line-height: 1.5;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .list.list-default ul > li {
-	list-style: none;
-	border-bottom: 1px solid rgba(51, 51, 51, 0.2);
-	padding: 10px;
-	position: relative;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+  list-style: none;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+  padding: 10px;
+  position: relative;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .list.list-default ul > li .list-desc {
-	position: relative;
+  position: relative;
 }
 
 .list.list-default ul > li .list-title {
-	font-size: 1em;
-	font-weight: 600;
-	margin: 0;
+  font-size: 1em;
+  font-weight: 600;
+  margin: 0;
 }
 
 .list.list-default ul > li p + p {
-	color: #333;
-	opacity: 0.75;
-	margin: 0;
-	font-size: 0.9em;
+  color: #333;
+  opacity: 0.75;
+  margin: 0;
+  font-size: 0.9em;
 }
 
 .list.list-default ul > li.linked {
-	padding-right: 44px;
-	cursor: pointer;
+  padding-right: 44px;
+  cursor: pointer;
 }
 
 .list.list-default ul > li.linked:after {
-	content: "\f105";
-	font: normal normal normal 14px/1 FontAwesome;
-	position: absolute;
-	width: 44px;
-	height: 44px;
-	top: 50%;
-	right: 0;
-	margin-top: -22px;
-	color: #333;
-	font-size: 34px;
-	line-height: 44px;
-	text-align: center;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  content: "\f105";
+  font: normal normal normal 14px/1 FontAwesome;
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  top: 50%;
+  right: 0;
+  margin-top: -22px;
+  color: #333;
+  font-size: 34px;
+  line-height: 44px;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .list.list-default ul > li.linked:active {
-	background-color: rgba(51, 51, 51, 0.06);
+  background-color: rgba(51, 51, 51, 0.06);
 }

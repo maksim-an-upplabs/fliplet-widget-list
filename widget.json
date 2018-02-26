@@ -1,5 +1,5 @@
 {
-  "name": "Simple List",
+  "name": "List (no images)",
   "package": "com.fliplet.simple-list",
   "version": "1.0.0",
   "icon": "img/icon.png",
@@ -27,18 +27,17 @@
     "dependencies": [
       "fliplet-core",
       "bootstrap-css",
-      "lodash"
+      "lodash",
+      "list-swipe",
+      "mixitup"
     ],
     "assets": [
-      "vendor/jquery.mixitup.min.js",
-      "lib/list-swipe.js",
-      "lib/list-swipe-save.js",
       "js/build.js",
-      "css/build.css",
-      "lib/list-swipe.css"
+      "css/build.css"
     ]
   },
   "references": [
-    "items.$.linkAction.page:page"
+    "items.$.linkAction.page:page",
+    "items.$.linkAction.files.id:mediaFile"
   ]
 }

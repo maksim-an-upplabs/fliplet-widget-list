@@ -21,19 +21,13 @@
               <div class="screen-reorder-handle">
                 <i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i>
               </div>
-              <span class="fa fa-chevron-down"></span>
-              <span class="panel-title-text">
-                {{#unless title}}
-                  List item {{number}}
-                {{else}}
-                  {{~title~}}
-                {{/unless}}
-              </span>
+              <span class="fa fa-chevron-right"></span>
+              <span class="panel-title-text">{{~title~}}</span>
             </h4>
             <a href="#"><span class="icon-delete fa fa-trash"></span></a>
           </div>
 
-          <div id="collapse-{{id}}" class="panel-collapse collapse in">
+          <div id="collapse-{{id}}" class="panel-collapse collapse">
             <div class="panel-body">
               <div class="form-horizontal">
 
@@ -42,7 +36,7 @@
                     <label for="list-item-title-{{id}}">Title</label>
                   </div>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control list-item-title" id="list-item-title-{{id}}" name="list-item-title-{{id}}" placeholder="Enter title" value="{{#unless title}}List item {{number}}{{else}}{{~title~}}{{/unless}}">
+                    <input type="text" class="form-control list-item-title" id="list-item-title-{{id}}" name="list-item-title-{{id}}" placeholder="Enter title" value="{{~title~}}">
                   </div>
                 </div>
 
@@ -55,16 +49,7 @@
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <div class="col-sm-4 control-label">
-                    <label for="list-item-link-{{id}}">Link</label>
-                  </div>
-                  <div class="col-sm-8">
-                    <div class="btn btn-default list-item-set-link {{#if linkAction}} hidden{{/if}}">Add Link</div>
-                    <div class="btn btn-link text-danger link-remove {{#unless linkAction}} hidden {{/unless}}">Remove Link</div>
-                    <div class="add-link"></div>
-                  </div>
-                </div>
+                <div class="add-link"></div>
 
               </div>
             </div>
@@ -79,39 +64,35 @@
       </div>
 
       <div class="controls clearfix">
-        <div class="btn btn-link expand-items">Expand/Collapse All</div>
         <div class="btn-holder">
-          <div class="btn btn-sm btn-default new-list-item">Add new item</div>
+          <div class="btn btn-default new-list-item">Add new item</div>
         </div>
+        <div class="btn btn-link expand-items">Expand/Collapse All</div>
       </div>
       <div class="controls controls-sticky">
-        <div class="btn btn-link expand-items">Expand/Collapse All</div>
-        <div  class="btn-holder">
-          <div class="btn btn-sm btn-default new-list-item">Add new item</div>
+        <div class="btn-holder">
+          <div class="btn btn-default new-list-item">Add new item</div>
         </div>
+        <div class="btn btn-link expand-items">Expand/Collapse All</div>
       </div>
     </div>
 
     <div role="tabpanel" class="tab-pane tab-pane-content" id="swipe-save">
       <p>Enable <em>Swipe to Save</em> to let your users swipe on any list item to save/bookmark it for later.</p>
 
-      <div class="form-group">
+      <div class="form-group inline-radio">
         <div class="col-sm-4 control-label">
           <label for="swipe-to-save">Enable Swipe to Save</label>
         </div>
         <div class="col-sm-8">
           <div class="radio-buttons clearfix">
-            <div class="radio">
+            <div class="radio radio-icon">
               <input type="radio" id="swipe-to-save-yes" name="enable_list_saving" value="swipe-to-save-yes" {{#if swipeToSave}}checked{{/if}}>
-              <label for="swipe-to-save-yes">
-                Yes
-              </label>
+              <label for="swipe-to-save-yes">Yes</label>
             </div>
-            <div class="radio">
+            <div class="radio radio-icon">
               <input type="radio" id="swipe-to-save-no" name="enable_list_saving" value="swipe-to-save-no" {{#if swipeToSave}}{{else}}checked{{/if}}>
-              <label for="swipe-to-save-no">
-                No
-              </label>
+              <label for="swipe-to-save-no">No</label>
             </div>
           </div>
         </div>
@@ -139,7 +120,7 @@
         <div class="screen-reorder-handle">
           <i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i>
         </div>
-        <span class="fa fa-chevron-down"></span><span class="panel-title-text">List item \{{number}}</span>
+        <span class="fa fa-chevron-down"></span><span class="panel-title-text">\{{~title~}}</span>
       </h4>
       <a href="#"><span class="icon-delete fa fa-trash"></span></a>
     </div>
@@ -152,7 +133,7 @@
               <label for="list-item-title-\{{id}}">Title</label>
             </div>
             <div class="col-sm-8">
-              <input type="text" class="form-control list-item-title" id="list-item-title-\{{id}}" name="list-item-title-\{{id}}" placeholder="Enter title" value="List item \{{number}}">
+              <input type="text" class="form-control list-item-title" id="list-item-title-\{{id}}" name="list-item-title-\{{id}}" placeholder="Enter title" value="\{{~title~}}">
             </div>
           </div>
 
@@ -165,16 +146,7 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <div class="col-sm-4 control-label">
-              <label for="list-item-link-\{{id}}">Link</label>
-            </div>
-            <div class="col-sm-8">
-              <div class="btn btn-default list-item-set-link">Add Link</div>
-              <div class="btn btn-link text-danger link-remove hidden">Remove</div>
-              <div class="add-link"></div>
-            </div>
-          </div>
+          <div class="add-link"></div>
 
         </div>
       </div>
