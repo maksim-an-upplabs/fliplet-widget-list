@@ -9,6 +9,13 @@ $('.linked[data-list-item-id]').click(function (event) {
   var itemData = _.find(data.items,{id: $(this).attr('data-list-item-id')});
 
   if(!_.isUndefined(itemData) && (!_.isUndefined(itemData.linkAction) && !_.isEmpty(itemData.linkAction))) {
+    // Analytics - Track Event
+    Fliplet.Analytics.trackEvent({
+      category: 'link',
+      action: 'screen',
+      title: itemData.title
+    });
+
     Fliplet.Navigate.to(itemData.linkAction);
   }
 });
