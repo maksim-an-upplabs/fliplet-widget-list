@@ -46,9 +46,14 @@
   cursor: pointer;
 }
 
-.list.list-default ul > li.linked:after {
-  content: "\f105";
-  font: normal normal normal 14px/1 FontAwesome;
+.list.list-default ul > li.linked .list-icon {
+  display: none;
+}
+
+.list.list-default ul > li.linked .list-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   width: 44px;
   height: 44px;
