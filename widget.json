@@ -1,7 +1,7 @@
 {
   "name": "List (no images)",
   "package": "com.fliplet.simple-list",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "icon": "img/icon.png",
   "tags": ["type:component", "category:list"],
   "html_tag": "div",
