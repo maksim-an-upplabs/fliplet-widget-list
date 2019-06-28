@@ -46,7 +46,7 @@
   cursor: pointer;
 }
 
-.list.list-default ul > li.linked .list-icon {
+.list.list-default ul > li .list-icon {
   display: none;
 }
 
